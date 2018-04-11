@@ -1,0 +1,235 @@
+{% extends 'cosite/globalBase.html' %}
+{% load staticfiles %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block pageHeader %}
+{% endblock %}
+
+
+{% block pageBody %}
+  <div class="content-header">
+                <div class="leftside-content-header">
+                    <ul class="breadcrumbs">
+                        <li><i class="fa fa-table" aria-hidden="true"></i><a href="#">测试任务管理</a></li>
+                        <li><a>任务列表</a></li>
+                    </ul>
+                </div>
+  </div>
+
+  <div class="row">
+      <div class="col-sm-12">
+          <div class="panel" id="currentTaskPanel">
+              <div class="panel-header">
+                  <h3 class="panel-title" id="task_name">测试用例<span class="code">正在进行</span></h3>
+                  <h3 class="panel-subtitle">测试类型：</h3>
+              </div>
+              <div class="panel-content" style="height: 80px">
+              </div>
+              <div class="panel-footer">开始时间：2017/4/25 10:00</div>
+          </div>
+      </div>
+  </div>
+<!-- 选择厂商 选择对应版本 -->
+<div class="vender-version">
+     <select id="choose-vendor">
+       <option selected disabled>请选择厂商</option>
+       <option value="zhongXing">中兴</option>
+       <option value="huaWei">华为</option>
+       <option value="nokia">诺基亚</option>
+       <option value="cisco">思科</option>
+       <option value="ericsson">爱立信</option>
+       <option value="certus">赛特斯</option>
+       <option value="h3c">华三</option>
+     </select>
+     <select id="choose-version">
+       <option selected disabled>请选择厂商版本</option>
+     </select>
+
+     <select id="choose-cloudPlatform">
+       <option selected disabled>请选择云平台</option>
+       <option value="zhongXing">中兴</option>
+       <option value="huaWei">华为</option>
+       <option value="h3c">华三</option>
+       <option value="VMware">VMware</option>
+     </select>
+
+     <select id="choose-platformVers">
+       <option selected disabled>请选择平台版本</option>
+     </select>
+
+<!-- 按钮触发模态框 -->
+<button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+  请配置网元
+</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h5 class="modal-title" id="myModalLabel">
+          选择网元类型并配置
+        </h5>
+      </div>
+      <div class="modal-body">
+        
+        <div class="net-node-type">
+          <span id="node-config1">网元一</span>
+          <span id="node-config2">网元二</span>
+          <span id="node-config3">网元三</span>
+        </div>  
+       
+        <div class="node-config1">
+          <div>
+            <select id="ip_addr">
+              <option disabled selected>请选择IP地址</option>
+              <option>192.168.21.100</option>
+              <option>172.16.110.249</option>
+            </select>
+          </div>
+          <div>
+            <select id="choose-slot">
+              <option disabled selected>请选择Slot</option>
+              <option value="1">slot1</option>
+              <option value="2">slot2</option>
+              <option value="3">slot3</option>
+              <option value="4">slot4</option>
+              <option value="5">slot5</option>
+              <option value="6">slot6</option>
+              <option value="7">slot7</option>
+              <option value="8">slot8</option>
+              <option value="9">slot9</option>
+              <option value="10">slot10</option>
+              <option value="11">slot11</option>
+            </select>
+          </div>
+          <div id="choose-port"> 
+            <p>请选择Port</p> 
+            <label><input type="checkbox" value="1">Port1</label>
+            <label><input type="checkbox" value="2">Port2</label>
+            <label><input type="checkbox" value="3">Port3</label>
+            <label><input type="checkbox" value="4">Port4</label>
+            <label><input type="checkbox" value="5">Port5</label>
+            <label><input type="checkbox" value="6">Port6</label>
+            <label><input type="checkbox" value="7">Port7</label>
+            <label><input type="checkbox" value="8">Port8</label>
+            <label><input type="checkbox" value="9">Port9</label>
+            <label><input type="checkbox" value="10">Port10</label>
+            <label><input type="checkbox" value="11">Port11</label>
+            <label><input type="checkbox" value="12">Port12</label>
+          </div>
+        </div>
+       
+       <div class="node-config2">暂无配置数据</div>
+       <div class="node-config3">暂无配置数据</div> 
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirm_netnode">
+          确认提交
+        </button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal -->
+</div>
+
+</div>
+<hr>
+<div class="task-list-content">
+    <div class="tab-change">
+         <span id="tab-content1">PPPOE并发会话容量测试</span>
+         <span id="tab-content2">用户侧转发性能测试</span>
+         <span id="tab-content3">综合上网业务测试</span>
+    </div>
+
+
+    <div class="tab-content1">
+        <div class="task-config">
+            <p><strong>说明：</strong>测试单台vBRAS整机最大可以支持PPPoE用户并发上线数量</p>
+            <p><label>测试流量<input type="text" placeholder="请输入测试流量" id="test_vBRAS_session_pt"></label></p>
+            <!-- 这里需要改id，请求数据变了 -->
+            <p><label>最大并发会话容量<input type="text" placeholder="请输入数据" id="test_vBRAS_session_sn"></label></p>
+            <p><label>新建会话速率<input type="text" placeholder="请输入数据" id="test_vBRAS_session_sv"></label></p>
+        </div>
+        
+        <div class="cloudstress">
+            <label>Cloudstress
+                <span>
+                <label><input type="radio" name="cloudstress1" value="yes">Yes</label>
+                <label><input type="radio" name="cloudstress1" value="no" checked>No</label>
+                </span>
+            </label>
+        </div>
+        <button id="test_vBRAS_session_bg">开始测试</button>
+    </div>
+
+    <div class="tab-content2">   
+        <div class="task-config">
+            <p><strong>说明：</strong>测试单个vBRAS的用户侧转发性能</p>
+            <p><label>测试流量<input type="text" placeholder="请输入测试流量" id="test_vBRAS_frame_pt"></label></p>
+            <p><label>Session数<input type="text" placeholder="请输入Session数" id="test_vBRAS_frame_sn"></label></p>
+        </div>
+        
+        <div class="cloudstress">
+            <label>Cloudstress
+                <span>
+                <label><input type="radio" name="cloudstress2" value="yes">Yes</label>
+                <label><input type="radio" name="cloudstress2" value="no" checked>No</label>
+                </span>
+            </label>
+        </div>
+        
+        <div>
+            <select>
+                <option selected disabled>请选择测试帧数</option>
+                <option>64字节</option>
+                <option>128字节</option>
+                <option>256字节</option>
+                <option>512字节</option>
+                <option>1024字节</option>
+                <option>1280字节</option>
+                <option>1518字节</option>
+            </select>
+        </div>
+        <button id="test_vBRAS_frame_bg">开始测试</button>
+    </div>
+
+    <div class="tab-content3">
+        <div class="task-config">
+            <p><strong>说明：</strong>验证用户同时开通宽带上网、IPTV、ITMS和语音业务，各项功能正常</p>
+            <p><label>测试流量<input type="text" placeholder="请输入测试流量" id="test_vBRAS_multi_pt"></label></p>
+            <p><label>Session数<input type="text" placeholder="请输入Session数" id="test_vBRAS_multi_sn"></label></p>
+        </div>
+
+        <div class="cloudstress">
+            <label>Cloudstress
+                <span>
+                <label><input type="radio" name="cloudstress3" value="yes">Yes</label>
+                <label><input type="radio" name="cloudstress3" value="no" checked>No</label>
+                </span>
+            </label>
+        </div>
+ 
+        <div>
+            <select>
+                <option selected disabled>请选择业务类型</option>
+                <option>宽带上网（PPPoE）</option>
+                <option>IPTV（PPPoE）</option>
+                <option>ITMS（IPoE）</option>
+                <option>VoIP（IPoE）</option>
+            </select>
+         </div>
+         <button id="test_vBRAS_multi_bg">开始测试</button>   
+    </div>
+</div>
+
+{% endblock %}
+{% block pageFooter %}
+    <script src="../../static/js/my/show_Task2.js"></script>
+{% endblock %}
+  

@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load custom_tags %}
+{% load custom_filters %}
+{% get_current_language as LANGUAGE_CODE %}
+<script>
+  var app = {};
+  app.debug = '{% get_setting_parameter "DEBUG" %}';
+  app.version = '{% get_setting_parameter "APP_VERSION" %}';
+  app.httpHost = '';
+  app.basePath = '{% get_base_path %}';
+  app.jsPaths = '{% get_js_path %}';
+  app.locale= '{% get_current_language as LANGUAGE_CODE %}';
+  app.csrf_token= '{{ csrf_token }}';
+  app.config = {};
+  app.arguments = {};
+  {% if script_controller is defined %}
+    app.controller = '{{ script_controller }}';
+  {% endif %}
+  {% if script_arguments is defined %}
+{#    app.arguments = {{ script_arguments|json_encode }};#}
+  {% endif %}
+</script>
+
+<script src="{% asset 'assets/js/seajs/dist/sea.js' %}"></script>
+<script src="{% asset 'assets/js/seajs/plugins/seajs-css.js' %}"></script>
+<script src="{% asset 'assets/js/seajs/plugins/seajs-style.js' %}"></script>
+<script src="{% asset 'assets/js/seajs-global-config.js' %}"></script>
+
+
+<script>
+  seajs.use("{% asset script_main %}");
+</script>

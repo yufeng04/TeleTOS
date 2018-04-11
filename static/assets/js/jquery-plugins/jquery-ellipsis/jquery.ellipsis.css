@@ -1,0 +1,26 @@
+.ellpsis-container{
+  word-wrap: break-word;
+}
+
+.toggle-opened{
+    height: auto;
+}
+.ellpsis-toggle{
+    margin: 0;
+    padding: 0;
+    color: #428bca;
+    height: 20px;
+    display: inline;
+}
+.ellpsis-toggle .plus {
+    display: inline;
+}
+.toggle-opened .ellpsis-toggle .minus {
+    display: inline;
+}
+.ellpsis-toggle .minus {
+    display: none;
+}
+.toggle-opened a.ellpsis-toggle .plus {
+    display: none;
+}

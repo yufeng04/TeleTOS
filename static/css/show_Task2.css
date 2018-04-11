@@ -1,0 +1,126 @@
+.tab-change {
+	display: flex;
+	width: 90%;
+	flex-direction: column;
+    justify-content: space-between;
+}
+.tab-change span {
+	width: 25%;
+	height: 50px;
+	padding-top: 15px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	background: #6cf;
+	margin: 5px;
+}
+
+
+.vender-version {
+	display: flex;
+	justify-content: space-between;
+}
+.vender-version select {
+	width: 20%;
+	height: 40px;
+	font-size: 17px;
+}
+
+/*网元配置弹出层*/
+.net-node-type {
+	display: flex;
+	width: 150px;
+	flex-direction: column;
+    justify-content: space-between;
+}
+.net-node-type span {
+	width: 150px;
+	height: 50px;
+	padding-top: 15px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	background: #6cf;
+	margin: 5px;
+}
+.node-config1,
+.node-config2,
+.node-config3 {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	position: absolute;
+	left: 40%;
+	bottom: 5%;
+}
+.node-config1 select {
+	width: 80%;
+	margin-top: 10px;
+}
+#choose-port p {
+	margin-top: 10px;
+	font-size: 20px;
+}
+
+
+
+.task-list-content {
+	position: relative;
+	width: 100%;
+	height: auto;
+	margin-top: 20px;
+}
+
+.tab-content1,
+.tab-content2,
+.tab-content3 {
+	position: absolute;
+	right: 10%;
+	top: 0;
+	border: 1px solid #ccc;
+	width: 60%;
+	height: 150%;
+	background: #6cf;
+}
+.task-config {
+	padding: 20px;
+}
+.task-config label {
+  font-size: 17px;
+}
+.task-config input {
+  position: absolute;
+  right: 30%;
+  height: 30px;
+  width: 240px;
+  font-size: 14px;
+}
+.task-config p {
+  line-height: 30px;
+	font-size: 17px;
+}
+.cloudstress {
+	padding-left: 20px;
+	font-size: 17px;
+}
+.cloudstress span {
+    position: relative;
+    left: 20%;
+}
+.task-list-content select {
+    width: 300px;
+    height: 30px;
+    font-size: 17px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.task-list-content button {
+	position: absolute;
+	bottom: 5px;
+	right: 10px;
+	width: 100px;
+	height: 40px;
+	background: #6cf;
+	border-radius: 5px;
+	font-size: 17px;
+}

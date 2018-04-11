@@ -1,0 +1,145 @@
+{% extends 'cosite/globalBase.html' %}
+{% load staticfiles %}
+
+{% block pageHeader %}
+    <script>
+     window.onload=function() {
+        document.getElementById("nav_performance").setAttribute("class", "has-child-item open-item active-item");
+        document.getElementById("nav_vBRAS").setAttribute("class", "active-item");
+        $(nav_dashboard).removeClass("active-item");
+    }
+    </script>
+{% endblock %}
+
+{% block pageBody %}
+    <div class="content-header">
+        <div class="leftside-content-header">
+            <ul class="breadcrumbs">
+                <li><i class="fa fa-pie-chart" aria-hidden="true"></i><a href="#">性能资源</a></li>
+                <li><a>vBRAS</a></li>
+            </ul>
+        </div>
+    </div>
+
+  <form class="form-horizontal" role="form">
+  <fieldset>
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="col-lg-5">
+                <label for="timeBegin" class="control-label col-sm-4">开始时间：</label>
+                <div class="input-group date col-sm-8">
+                    <input class="form-control" name="timeBegin" id="timeBegin" type="datetime"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <label for="timeEnd" class="control-label col-sm-4">结束时间：</label>
+                <div class="input-group date col-sm-8" id="picker2">
+                    <input class="form-control" name="timeEnd" id="timeEnd" type="datetime"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <input class="btn btn-primary btn-block" id="btnShow_Data" type="button" value="查询"/>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="col-lg-10">
+                <label for="select2-example-basic" class="control-label col-sm-2">测试任务：</label>
+                        <div class="col-sm-10">
+                            <select name="country" class="form-control" id="test_list">
+                                <optgroup label="PPPOE并发会话容量测试" id="test_vBRAS_session_list" >
+                                    <option value=" " label=" "></option>
+                                </optgroup>
+                                <optgroup label="vBRAS用户侧转发性能测试" id="test_vBRAS_frame_list" >
+                                    <option value=" " label=" "></option>
+                                </optgroup>
+                                <optgroup label="vBRAS综合上网业务测试" id="test_vBRAS_multi_list" >
+                                    <option value=" " label=" "></option>
+                                </optgroup>
+                            </select>
+                        </div>
+            </div>
+        </div>
+    </div>
+  </fieldset>
+</form>
+
+  <div class="row animated fadeInUp">
+   <div class="col-md-6">
+        <h4 class="section-subtitle"><b>性能资源比(CPU)</b></h4>
+                <div class="panel">
+                    <div class="panel-content" >
+                    <canvas id="myChart_line" width="400" height="280"></canvas>
+                         <table class="table">
+                        <tr>
+                        <th>CPU平均利用率</th>
+                        <th>稳定系数</th>
+                        </tr>
+                        <tr>
+                        <td id="CPU_usage"></td>
+                        <td id="CPU_SF"></td>
+                        </tr>
+                    </table>
+                    </div>
+                </div>
+    </div>
+
+   <div class="col-md-6">
+        <h4 class="section-subtitle"><b>性能资源比(内存)</b></h4>
+        <div class="panel">
+            <div class="panel-content">
+                <canvas id="myChart_area" width="400" height="350"></canvas>
+{#                <table class="table">#}
+{#                        <tr>#}
+{#                        <th></th>#}
+{#                        <th></th>#}
+{#                        </tr>#}
+{#                        <tr>#}
+{#                        <td id="Memory_usage"></td>#}
+{#                        <td id="Memory_SF"></td>#}
+{#                        </tr>#}
+{#                    </table>#}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <h4 class="section-subtitle"><b>资源利用稳定性</b> (标准差)</h4>
+        <div class="panel">
+            <div class="panel-content">
+                <canvas id="myChart_bar" width="400" height="180"></canvas>
+            </div>
+        </div>
+    </div>
+
+  </div>
+
+{% endblock %}
+
+{% block pageFooter %}
+<script>
+$('.date').datetimepicker({
+    format: 'YYYY-MM-DD HH:mm',
+    locale: moment.locale('zh-cn'),
+    showTodayButton: true
+  });
+  $(function(){
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth();
+    var day = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    // 默认为到现在为止一个月的时间间隔
+    $('#timeBegin').val(year + '-' + (month-1) + '-' + day + ' ' + hour + ':' + minute);
+    $('#timeEnd').val(year + '-' + (month+1) + '-' + day + ' ' + hour + ':' + minute);
+  });
+</script>
+{% endblock %}

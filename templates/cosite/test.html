@@ -1,0 +1,43 @@
+{% extends 'globalBase.html' %}
+{% load staticfiles %}
+
+{% block pageTitle %}testPage{% endblock %}
+
+{% block pageHeader %}
+<style>
+table>thead>tr>th {
+  text-align: center;
+}
+</style>
+{% endblock %}
+
+{% block pageBody %}
+  <h1>test</h1>
+
+  <input type="button" id="testButton" value="clickme"></input>
+    {% csrf_token %}
+{% endblock %}
+
+{% block pageFooter %}
+  <script>
+  $('#testButton').click(function() {
+      $.ajax('/api/v1/test/', {
+          method:'POST',
+          dataType: 'json',
+          data:{
+              scripttype: 'itest',
+              serverIp: '10.65.104.23',
+              testcase: '',
+              taskId: '243d8bd5-15fa-48b1-b9c8-d19a2f7b7338',
+              device: '',
+              parameter: '',
+              //csrfmiddlewaretoken: $('input[type=hidden]').val()
+          }
+      }).done(function (data) {
+          //alert(data.stepId);
+          alert("接收到data");
+          alert(data);
+      });
+  });
+  </script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% block content %}
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    {% get_current_language as LANGUAGE_CODE %}
+    {% get_available_languages as LANGUAGES %}
+ {% get_current_language_bidi as bidi %}
+{{ bidi }}
+    {% get_language_info_list for LANGUAGES as languages %}
+    {% get_language_info for LANGUAGE_CODE as lang %}
+
+    <select name="language">
+
+
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Go" />
+</form>
+{% endblock %}

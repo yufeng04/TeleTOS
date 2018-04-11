@@ -1,0 +1,287 @@
+{% extends 'cosite/globalBase.html' %}
+
+{% block pageTitle %}Collaborative Optimization{% endblock %}
+{% load staticfiles %}
+
+{% block pageHeader %}
+ <script>
+         window.onload=function()
+        {
+            document.getElementById("nav_performance").setAttribute("class","has-child-item open-item active-item");
+            document.getElementById("nav_vBRAS").setAttribute("class","active-item");
+            $(nav_dashboard).removeClass("active-item");
+        }
+    </script>
+{% endblock %}
+
+{% block pageBody %}
+            <div class="content-header">
+                <div class="leftside-content-header">
+                    <ul class="breadcrumbs">
+                        <li><i class="fa fa-files-o" aria-hidden="true"></i><a href="#">测试报告</a></li>
+                        <li><a>vBRAS性能测试报告</a></li>
+                    </ul>
+                </div>
+            </div>
+
+<form class="form-horizontal" role="form">
+  <fieldset>
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="col-lg-6">
+                <label for="timeBegin" class="control-label col-sm-4">开始时间：</label>
+                <div class="input-group date col-sm-8">
+                    <input class="form-control" name="timeBegin" id="timeBegin" type="datetime"/>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <label for="timeEnd" class="control-label col-sm-4">结束时间：</label>
+                <div class="input-group date col-sm-8" id="picker2">
+                    <input class="form-control" name="timeEnd" id="timeEnd" type="datetime"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="col-lg-10">
+                <label for="select2-example-basic" class="control-label col-sm-2">测试任务：</label>
+                        <div class="col-sm-10">
+                            <select name="country" class="form-control" id="test_vBRAS_multi_sn">
+                                <optgroup label="PPPOE并发会话容量测试" id="test_vBRAS_session_list" >
+                                    <option value=" " label=" "></option>
+                                </optgroup>
+                                <optgroup label="vBRAS用户侧转发性能测试" id="test_vBRAS_frame_list" >
+                                    <option value=" " label=" "></option>
+                                </optgroup>
+                                <optgroup label="vBRAS综合上网业务测试" id="test_vBRAS_multi_list" >
+                                    <option value=" " label=" "></option>
+                                </optgroup>
+                            </select>
+                        </div>
+            </div>
+            <div class="col-lg-2">
+                <input class="btn btn-primary btn-block" id="btnShow_Data" type="button" value="查询"/>
+            </div>
+        </div>
+    </div>
+
+  </fieldset>
+</form>
+<button id="btn-html2canvas">导出测试报告</button>
+
+    <div class="panel">
+                        <div class="panel-content">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-bordered text-center">
+                                    <h4 class="color-success">PPPOE并发会话容量测试</h4>
+                                    <tr>
+                                        <th>测试指标</th>
+                                        <th>测试标准</th>
+                                        <th>测试结果</th>
+                                        <th>是否通过</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                       <tr>
+                                        <td>最大平均会话容量</td>
+                                        <td id="max_session_std">1</td>
+                                        <td id="max_session">2</td>
+                                        <td id="max_session_result">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>新建平均会话速率</td>
+                                        <td id="avg_con_std"></td>
+                                        <td id="avg_con"></td>
+                                        <td id="avg_result"></td>
+                                    </tr>
+                                       <tr>
+                                        <td>新建最小会话速率</td>
+                                        <td id="min_con_std"></td>
+                                        <td id="min_con"></td>
+                                        <td id="min_result"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>需要的最大内存</td>
+                                        <td id="max_memory_std"></td>
+                                        <td id="max_memory"></td>
+                                        <td id="max_memory_result"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+    <div class="panel">
+                        <div class="panel-content">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-bordered text-center">
+                                     <h4 class="color-success">vBRAS用户侧转发性能测试</h4>
+                                    <tr>
+                                        <th>测试指标</th>
+                                        <th>测试标准</th>
+                                        <th>测试结果</th>
+                                        <th>是否通过</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                        <td>64字节转发性能</td>
+                                        <td id="rx_64_std"></td>
+                                        <td id="rx_64"></td>
+                                        <td id="rx_64_rlt"></td>
+                                    </tr>
+                                            <tr>
+                                        <td>128字节转发性能</td>
+                                        <td id="rx_128_std"></td>
+                                        <td id="rx_128"></td>
+                                        <td id="rx_128_rlt"></td>
+                                    </tr>
+                                       <tr>
+                                        <td>256字节转发性能</td>
+                                        <td id="rx_256_std"></td>
+                                        <td id="rx_256"></td>
+                                        <td id="rx_256_rlt"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>512字节转发性能</td>
+                                        <td id="rx_512_std"></td>
+                                        <td id="rx_512"></td>
+                                        <td id="rx_512_rlt"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1024字节转发性能</td>
+                                        <td id="rx_1024_std"></td>
+                                        <td id="rx_1024"></td>
+                                        <td id="rx_1024_rlt"></td>
+                                    </tr>
+                                       <tr>
+                                        <td>1280字节转发性能</td>
+                                        <td id="rx_1280_std"></td>
+                                        <td id="rx_1280"></td>
+                                        <td id="rx_1280_rlt"></td>
+                                    </tr>
+                                       <tr>
+                                        <td>1518字节转发性能</td>
+                                        <td id="rx_1518_std"></td>
+                                        <td id="rx_1518"></td>
+                                        <td id="rx_1518_rlt"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+    <div class="panel">
+                        <div class="panel-content">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-bordered text-center">
+                                     <h4 class="color-success"> 宽带上网（PPPoE）+IPTV（PPPoE）+ITMS（IPoE）+VoIP（IPoE）</h4>
+                                    <tr>
+                                        <th>测试指标</th>
+                                        <th>测试标准</th>
+                                        <th>测试结果</th>
+                                        <th>是否通过</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                       <tr>
+                                        <td>最大会话容量</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>新建会话速率</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>需要的最大内存</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+ <script>
+$('.date').datetimepicker({
+    format: 'YYYY-MM-DD HH:mm',
+    locale: moment.locale('zh-cn'),
+    showTodayButton: true
+  });
+  $(function(){
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth();
+    var day = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    // 默认为到现在为止一个月的时间间隔
+    $('#timeBegin').val(year + '-' + (month-1) + '-' + day + ' ' + hour + ':' + minute);
+    $('#timeEnd').val(year + '-' + (month+1) + '-' + day + ' ' + hour + ':' + minute);
+  });
+</script>
+<script type="text/javascript" src="../../static/js/html2canvas.js"></script>
+<script src="../../static/js/jsPdf.debug.js"></script>
+<script src="../../static/js/my/vBRAS_report.js"></script>
+<script type="text/javascript">
+
+      var downPdf = document.getElementById("btn-html2canvas");
+      downPdf.onclick = function() {
+          html2canvas(document.body, {
+              onrendered:function(canvas) {
+
+                  var contentWidth = canvas.width;
+                  var contentHeight = canvas.height;
+
+                  //一页pdf显示html页面生成的canvas高度;
+                  var pageHeight = contentWidth / 592.28 * 841.89;
+                  //未生成pdf的html页面高度
+                  var leftHeight = contentHeight;
+                  //pdf页面偏移
+                  var position = 0;
+                  //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+                  var imgWidth = 595.28;
+                  var imgHeight = 592.28/contentWidth * contentHeight;
+
+                  var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+                  var pdf = new jsPDF('', 'pt', 'a4');
+
+                  //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                  //当内容未超过pdf一页显示的范围，无需分页
+                  if (leftHeight < pageHeight) {
+                      pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight );
+                  } else {
+                      while(leftHeight > 0) {
+                          pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                          leftHeight -= pageHeight;
+                          position -= 841.89;
+                          //避免添加空白页
+                          if(leftHeight > 0) {
+                              pdf.addPage();
+                          }
+                      }
+                  }
+
+                  pdf.save('content.pdf');
+              }
+          })
+      }
+</script>
+{% endblock %}
+
+{% block pageFooter %}
+
+    <script src="../../static/js/examples/charts/chart-js.js"></script>
+    <script src="../../static/js/examples/charts/chart-js.js"></script>
+{% endblock %}

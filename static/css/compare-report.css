@@ -1,0 +1,90 @@
+/*选择对比类型*/
+.report-tab-change {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+.report-tab-change span {
+    height: 50px;
+    width: 50%;
+    background: #6cf;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    margin: 10px;
+    padding-top: 10px;
+}
+.report-config {
+	width: 100%;
+	height: auto;
+	margin: 10px;
+	background: #6cf;
+}
+.report-config button {
+	position: relative;
+	left: 90%;
+	width: 80px;
+	height: 50px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	background: #6cf;
+	font-size: 17px;
+	color: #fff;
+}
+.report-config button:hover {
+	background: #fff;
+	color: #000;
+}
+.report-style1 select {
+	margin: 10px;
+	width: 31%;
+	height: 40px;
+	font-size: 16px;
+}
+.report-style2 {
+	margin: 10px;
+}
+.report-style2 p {
+	font-size: 20px;
+	color: #fff;
+	line-height: 30px;
+}
+.report-style2 label {
+	font-size: 17px;
+	color: #fff;
+	width: 33%;
+}
+
+/*报告表格*/
+.report-type {
+	font-size: 20px;
+	margin: 20px 0 20px 250px;
+}
+.report-table {
+	margin-left: 10%;
+}
+.report-table th,
+.report-table td {
+	width: 180px;
+	height: 40px;
+	font-size: 16px;
+	text-align: center;
+	line-height: 40px;
+	border: 1px solid black;
+}
+.report-table button {
+	position: absolute;
+	left: 15%;
+	margin-top: 20px;
+	width: auto;
+	height: 40px;
+	border-radius: 5px;
+	font-size: 16px;
+	color: #000;
+	background: #ccc;
+}
+.type-report button:hover {
+	background: green;
+	color: #fff;
+}
+

@@ -1,0 +1,68 @@
+    <div class="modal-header state modal-primary">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modal-large-label">vBRAS用户侧转发性能</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal form-stripe">
+                    <div class="form-group">
+                        <label for="select2-example-basic" class="col-sm-3 control-label">测试流量</label>
+                        <div class="col-sm-9">
+                            <select name="country" id="test_vBRAS_frame_pt" class="form-control" style="width: 100%"><optgroup label="10-20 G">
+                                <option value="10GLAN" label="10 G">10 G</option>
+                                <option value="15GLAN" label="15 G">15 G</option>
+                                <option value="20GLAN" label="20 G">20 G</option>
+                            </optgroup>
+                                <optgroup label="25-30 G">
+                                    <option value="25GLAN" label="25 G">25 G</option>
+                                    <option value="30GLAN" label="30 G">30 G</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="select2-example-basic" class="col-sm-3 control-label">Session数</label>
+                        <div class="col-sm-9">
+                            <select name="country" id="test_vBRAS_frame_sn" class="form-control" style="width: 100%">
+                                <optgroup label="10000-20000">
+                                    <option value="500" label="500">500</option>
+                                    <option value="10000" label="10000">10000</option>
+                                    <option value="15000" label="15000">15000</option>
+                                    <option value="20000" label="20000">20000</option>
+                                </optgroup>
+                                <optgroup label="25000-30000">
+                                    <option value="25000" label="25000">25000</option>
+                                    <option value="30000" label="30000">30000</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label for="select2-example-basic" class="col-sm-3 control-label">cloudstress</label>
+                        <div class="col-sm-9">
+                            <select name="country" id="test_vBRAS_frame_cs" class="form-control" style="width: 100%">
+                                <option value="no" label="no">no</option>
+                                <option value="yes" label="yes">yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="select2-example-basic" class="col-sm-3 control-label">帧</label>
+                        <div class="col-sm-9">
+                            <label class="checkbox-inline">64字节</label>
+                            <label class="checkbox-inline">128字节</label>
+                            <label class="checkbox-inline">256字节</label>
+                            <label class="checkbox-inline">512字节</label>
+                            <label class="checkbox-inline">1024字节</label>
+                            <label class="checkbox-inline">1280字节</label>
+                            <label class="checkbox-inline">1518字节</label>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

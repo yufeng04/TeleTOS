@@ -1,0 +1,302 @@
+{% extends 'cosite/globalBase.html' %}
+
+{% block pageTitle %}Collaborative Optimization{% endblock %}
+{% load staticfiles %}
+
+{% block pageHeader %}
+{% endblock %}
+
+{% block pageBody %}
+            <div class="content-header">
+                <div class="leftside-content-header">
+                    <ul class="breadcrumbs">
+                        <li><i class="fa fa-home" aria-hidden="true"></i><a href="#">仪表盘</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row animated fadeInUp">
+                <div class="col-sm-12 col-lg-7">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="panel">
+                                <div class="panel-content">
+                                    <h5><b>vBRAS</b> CPU利用率</h5>
+                                    <!-- <canvas id="line-chart" width="400" height="172"></canvas> -->
+                                      <div style="position: absolute; width: 150px;height: 40px;background: #fff;z-index: 9999;"></div>
+                                      <div id="chartdiv0" style="width:500px; height:400px;"></div>
+                                    </canvas>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                         <div class="col-sm-12 col-md-12">
+                            <div class="panel">
+                                <div class="panel-content">
+                                    <h5><b>vBRAS</b> 内存利用率</h5>
+                                    <!-- <canvas id="area-chart" width="400px" height="320px"></canvas> -->
+                                    <div style="position: absolute; width: 150px;height: 40px;background: #fff;z-index: 9999;"></div>
+                                    <div id="chartdiv1" style="width:500px; height:400px;"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="row">
+                         <div class="col-sm-12 col-md-12">
+                            <div class="panel">
+                                <div class="panel-content">
+                                    <h5><b>vBRAS</b> 转发性能测试(时延)</h5>
+                                    <canvas id="bar-chart" width="400" height="172"></canvas>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    -->
+
+                </div>
+                <div class="col-sm-12 col-lg-5">
+                    <div class="timeline" id="taskTimeLine">
+
+{#                        <div class="timeline-box">#}
+{#                            <div class="timeline-icon bg-primary">#}
+{#                                <i class="fa fa-tasks"></i>#}
+{#                            </div>#}
+{#                            <div class="timeline-content">#}
+{#                                <h4 class="tl-title">正在运行的测试用例</h4>#}
+{#                                <h5><b id="session_name"></b></h5>#}
+{#                                <div  id="area_chart11" class="panel-content">#}
+{#                                    <iframe class="chartjs-hidden-iframe" tabindex="-1" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>#}
+{#                                   <canvas id="Session_chart" width="490" height="318" style="display: block; width: 490px; height: 318px;"></canvas>#}
+{#                                </div>#}
+{##}
+{#                            </div>#}
+{#                    </div>#}
+
+                        <div class="timeline-box">
+                            <div class="timeline-icon bg-primary">
+                                <i class="fa fa-tasks"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4 class="tl-title">正在运行的测试用例</h4>
+                                <p class="text-bold" id="taskTypeTitle"></p>
+                                <p id="currentData"></p>
+                            </div>
+                            <div class="timeline-footer">
+                                <span id="begin_time"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="timeline-box">
+                            <div class="timeline-icon bg-primary">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="timeline-content">
+                                 <h5><b id="session_name"></b></h5>
+                                <div  id="area_chart11" class="panel-content">
+                                    <iframe class="chartjs-hidden-iframe" tabindex="-1" style="width: 100%; display: block; border: 0; height: 0; margin: 0; position: absolute; left: 0; right: 0; top: 0; bottom: 0;"></iframe>
+                                   <canvas id="Session_chart" width="490" height="318" style="display: block; width: 490px; height: 318px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+                <div style="font-size: 18px;margin-bottom: 20px;" id="progressData"></div>
+                <div class="progress progress-striped active">
+                    <div class="progress-bar progress-bar-success" role="progressbar"
+                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                         id="progressWidth" style="">
+                         <span class="sr-only"></span>
+                    </div>
+                </div>
+            </div>
+            </div>
+{#    <input type="button" id="testButton" value="clickme">#}
+
+{% endblock %}
+
+{% block pageFooter %}
+
+<script>
+    /**
+     *
+    window.onload=function()
+        {
+            alert('请求currentID');
+
+
+            $.ajax('/api/v1/current-task-id/POST',{
+                type:'POST',
+                data:
+                    JSON.stringify({
+                        flag: 1
+                    }),
+            }).done(function (data) {
+                var currentid = data.current_taskid;
+                var currenttype = data.current_tasktype
+                 alert(currentid + currenttype);
+            });
+        }
+
+    $('#testButton').click(function() {
+        alert('111');
+        $.ajax('/api/v1/test/',{
+          type:'POST',
+          data:
+              JSON.stringify({
+                  begin: 1,
+                  csrfmiddlewaretoken: $('input[type=hidden]').val()
+              }),
+      })
+
+    });
+
+      $('#testButton').click(function() {
+      alert('111');
+      $.ajax('/api/v1/vnf1-uuid/',{
+          type:'POST',
+          data:
+              JSON.stringify({
+                  begin: 1,
+                  csrfmiddlewaretoken: $('input[type=hidden]').val()
+              }),
+      }).done(function (data) {
+          // alert(data.stepId);
+          alert("接收到data");
+          id = data.taskId;
+          alert(id);
+          $.ajax('/api/v1/vnf1-itest/',{
+              type:'POST',
+              data:
+                  JSON.stringify({
+                      scripttype: 'itest',
+                      serverIp: '10.65.104.23',
+                      testcase: {
+                          script: [{
+                              type: 'itest',
+                              id: 1,
+                              file: 'VNF_1_Concurrent_Session_Capacity.fftc',
+                          }]
+                      },
+                      taskId: id,
+                      device: '',
+                      parameter: {
+                          PPPoEClientNum: '10000',
+                          porttype: '10GLAN'
+                      },
+                      csrfmiddlewaretoken: $('input[type=hidden]').val()
+                  }),
+          }).done(function(data){
+              alert(data.log);
+          })
+      });
+  });
+     */
+
+</script>
+{#    <script>#}
+{#            var chart;#}
+{#            var arrow;#}
+{#            var axis;#}
+{##}
+{#            var chart1;#}
+{#            var arrow1;#}
+{#            var axis1;  #}
+{##}
+{#            AmCharts.ready(function () {#}
+{#                // create angular gauge#}
+{#                chart = new AmCharts.AmAngularGauge();#}
+{#                chart.addTitle("CPU利用率");#}
+{##}
+{#                chart1 = new AmCharts.AmAngularGauge();#}
+{#                chart1.addTitle("内存利用率");#}
+{##}
+{##}
+{#                // create axis#}
+{#                axis = new AmCharts.GaugeAxis();#}
+{#                axis.startValue = 0;#}
+{#                axis.axisThickness = 1;#}
+{#                axis.valueInterval = 10;#}
+{#                axis.endValue = 100;#}
+{##}
+{#                axis1 = new AmCharts.GaugeAxis();#}
+{#                axis1.startValue = 0;#}
+{#                axis1.axisThickness = 1;#}
+{#                axis1.valueInterval = 10;#}
+{#                axis1.endValue = 100;#}
+{#                // color bands#}
+{#                var band1 = new AmCharts.GaugeBand();#}
+{#                band1.startValue = 0;#}
+{#                band1.endValue = 40;#}
+{#                band1.color = "#00CC00";#}
+{##}
+{#                var band1_1 = new AmCharts.GaugeBand();#}
+{#                band1_1.startValue = 0;#}
+{#                band1_1.endValue = 40;#}
+{#                band1_1.color = "#00CC00";#}
+{##}
+{#                var band2 = new AmCharts.GaugeBand();#}
+{#                band2.startValue = 40;#}
+{#                band2.endValue = 70;#}
+{#                band2.color = "#ffac29";#}
+{##}
+{#                var band2_1 = new AmCharts.GaugeBand();#}
+{#                band2_1.startValue = 40;#}
+{#                band2_1.endValue = 70;#}
+{#                band2_1.color = "#ffac29";#}
+{##}
+{#                var band3 = new AmCharts.GaugeBand();#}
+{#                band3.startValue = 70;#}
+{#                band3.endValue = 100;#}
+{#                band3.color = "#ea3838";#}
+{#                band3.innerRadius = "95%";#}
+{##}
+{#                var band3_1 = new AmCharts.GaugeBand();#}
+{#                band3_1.startValue = 70;#}
+{#                band3_1.endValue = 100;#}
+{#                band3_1.color = "#ea3838";#}
+{#                band3_1.innerRadius = "95%";#}
+{##}
+{#                axis.bands = [band1, band2, band3];#}
+{#                axis1.bands = [band1_1, band2_1, band3_1];#}
+{##}
+{#                // bottom text#}
+{#                axis.bottomTextYOffset = -20;#}
+{#                axis.setBottomText("0 %");#}
+{#                chart.addAxis(axis);#}
+{##}
+{#                axis1.bottomTextYOffset = -20;#}
+{#                axis1.setBottomText("0 %");#}
+{#                chart1.addAxis(axis1);#}
+{##}
+{##}
+{#                // gauge arrow#}
+{#                arrow = new AmCharts.GaugeArrow();#}
+{#                chart.addArrow(arrow);#}
+{##}
+{#                arrow1 = new AmCharts.GaugeArrow();#}
+{#                chart1.addArrow(arrow1);#}
+{##}
+{##}
+{#                chart.write("chartdiv0");#}
+{#                chart1.write("chartdiv1");#}
+{#                // change value every 2 seconds#}
+{#                setInterval(randomValue, 20000);#}
+{#            });#}
+{##}
+{#            // set random value#}
+{#            function randomValue() {#}
+{#                var value = Math.round(Math.random() * 100);#}
+{#                arrow.setValue(value);#}
+{#                axis.setBottomText(value + " %");#}
+{#                arrow1.setValue(value);#}
+{#                axis1.setBottomText(value + " %");#}
+{#            }#}
+{##}
+{#        </script>#}
+    <script src="../../static/js/examples/charts/chart-js.js"></script>
+{% endblock %}

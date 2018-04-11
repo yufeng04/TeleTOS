@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="多选列表框,jquery插件" />
+<meta name="description" content="Helloweba演示平台，演示XHTML、CSS、jquery、PHP案例和示例" />
+<title>操作多选列表框</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css" />
+<link rel="stylesheet" type="text/css" href="jquery.multiselect2side.css" />
+<style type="text/css">
+.demo{width:600px; margin:40px auto; color:#424242; background:#fff}
+
+</style>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="jquery.multiselect2side.js"></script>
+<script type="text/javascript">
+$(function(){
+   $("#liOption").multiselect2side({
+	    selectedPosition: 'right',
+	    moveOptions: false,
+		labelsx: '待选区',
+		labeldx: '已选区'
+   });
+});
+</script>
+</head>
+
+<body>
+<div id="header">
+   <div id="logo"><h1><a href="http://www.helloweba.com" title="返回helloweba首页">helloweba</a></h1></div>
+</div>
+
+<div id="main">
+  <h2 class="top_title"><a href="http://www.helloweba.com/view-blog-50.html">操作多选列表框</a></h2>
+  <div class="demo">
+    <form id="sel_form" action="posts.php" method="post">
+     <div id="sel">
+      <select name="liOption[]" id='liOption' multiple='multiple' size='8' >
+        <option value="PHP">PHP</option>
+        <option value="MYSQL">MYSQL</option>
+        <option value="ASP.NET">ASP.NET</option>
+        <option value="XHTML">XHTML</option>
+        <option value="CSS">CSS</option>
+        <option value="JQUERY">JQUERY</option>
+      </select>
+     </div>
+     <input type="submit" class="btn" value="提 交" />
+     </form>
+  </div>
+</div>
+<div id="footer">
+    <p>Powered by helloweba.com  允许转载、修改和使用本站的DEMO，但请注明出处：<a href="http://www.helloweba.com">www.helloweba.com</a></p>
+</div>
+<!--<p id="stat"><script type="text/javascript" src="http://js.tongji.linezing.com/1870888/tongji.js"></script></p>-->
+</body>
+</html>

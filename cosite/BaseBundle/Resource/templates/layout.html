@@ -1,0 +1,34 @@
+{% load i18n %}
+{% load custom_tags %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--自适应手机屏幕-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!--适应苹果手机-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--不要被百度转码-->
+    {% block meta %}{% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>{% block title %}{% trans 'VNF AUTOMATIC TEST SYSTEM' %}{% endblock %}</title>
+    {% block css %}
+        <link rel="stylesheet" href="{% asset 'assets/js/bootstrap/3.3.5/css/bootstrap.min.css' %}">
+    {% endblock %}
+    {% block javascripts %}{% endblock %}
+</head>
+<body>
+{% block body %}
+    {% block header %}{% endblock %}
+    {% block navbar %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}{% endblock %}
+{% endblock %}
+{% block scriptBoot %}
+    {% include 'script_boot.html' with script_main="bundles/cosite/js/cosite-app.js" %}
+{% endblock %}
+{% block modal %}{% endblock %}
+</body>
+</html>

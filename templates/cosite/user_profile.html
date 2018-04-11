@@ -1,0 +1,148 @@
+{% extends 'cosite/globalBase.html' %}
+
+{% block pageTitle %}Collaborative Optimization{% endblock %}
+
+{% block pageHeader %}
+    <script>
+         window.onload=function()
+        {
+            document.getElementById("nav_user").setAttribute("class","has-child-item open-item active-item");
+            document.getElementById("nav_personal_info").setAttribute("class","active-item");
+            $(nav_dashboard).removeClass("active-item");
+        }
+    </script>
+{% endblock %}
+
+{% block pageBody %}
+            <div class="content-header">
+                <div class="leftside-content-header">
+                    <ul class="breadcrumbs">
+                        <li><i class="fa fa-sitemap" aria-hidden="true"></i><a href="#">用户管理</a></li>
+                        <li><a>个人信息</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div>
+                        <div class="profile-photo">
+                            <img alt="Jane Doe" src="../../static/img/user-avatar.jpg" />
+                        </div>
+                        <div class="user-header-info">
+                            <h2 class="user-name">Admin</h2>
+                            <h5 class="user-position">测试管理员</h5>
+                        </div>
+                    </div>
+                    <div class="panel bg-scale-0 b-primary bt-sm mt-xl">
+                        <div class="panel-content">
+                            <h4 class=""><b>联系方式</b></h4>
+                            <ul class="user-contact-info ph-sm">
+                                <li><b><i class="color-primary mr-sm fa fa-envelope"></i></b> Admin.bri@chinatelecom.cn</li>
+                                <li><b><i class="color-primary mr-sm fa fa-phone"></i></b> 010-5090xxxx </li>
+                                <li><b><i class="color-primary mr-sm fa fa-globe"></i></b> 北京, 中国</li>
+                                <li class="mt-sm">北京市昌平区北七家镇未来科技城南区中国电信北京信息科技创新园1301室——邮编：102209
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel  b-primary bt-sm ">
+                        <div class="panel-content">
+                            <div class="widget-list list-sm list-left-element ">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <div class="left-element"><i class="fa fa-check color-success"></i></div>
+                                            <div class="text">
+                                                <span class="title">12项测试任务</span>
+                                                <span class="subtitle">已完成</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="left-element"><i class="fa fa-clock-o color-warning"></i></div>
+                                            <div class="text">
+                                                <span class="title">3项测试任务</span>
+                                                <span class="subtitle">正在进行</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="left-element"><i class="fa fa-envelope color-primary"></i></div>
+                                            <div class="text">
+                                                <span class="title">发送邮件</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-8">
+                    <div class="timeline animated fadeInUp">
+                        <div class="timeline">
+
+                        <div class="timeline-box">
+                            <div class="timeline-icon bg-primary">
+                                <i class="fa fa-tasks"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4 class="tl-title">正在测试 </h4> vBRAS测试项目三
+                            </div>
+                            <div class="timeline-content">
+                                已完成80%
+                            </div>
+                            <div class="timeline-content">
+                                开始时间：2017/4/25 10:00
+                            </div> 
+
+                            <div class="timeline-footer">
+                                <span>创建人：Admin</span>
+                            </div>
+                        </div>
+                        <div class="timeline-box">
+                            <div class="timeline-icon bg-primary">
+                                <i class="fa fa-file"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4 class="tl-title">生成报告</h4> 测试项目一
+                            </div>
+                            <div class="timeline-content">
+                                开始时间：2017/4/24 10:00
+                            </div>
+                            <div class="timeline-content">
+                                结束时间：2017/4/24 17:00
+                            </div> 
+
+                            <div class="timeline-footer">
+                                <span>创建人：Admin</span>
+                            </div>
+                        </div>
+                        <div class="timeline-box">
+                            <div class="timeline-icon bg-primary">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4 class="tl-title">测试完成</h4> 测试项目二
+                            </div>
+                            <div class="timeline-content">
+                                开始时间：2017/4/25 09:00
+                            </div>
+                            <div class="timeline-content">
+                                结束时间：2017/4/25 12:00
+                            </div> 
+
+                            <div class="timeline-footer">
+                                <span>创建人：Admin</span>
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block pageFooter %}{% endblock %}
+
